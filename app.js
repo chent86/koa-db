@@ -6,11 +6,8 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const prepare = require('./lib/prepare');
-const RestQL = require('koa-restql');
+const setRoute=require('./router');
 
-const models = prepare.sequelize.models;
-const restql = new RestQL(models);
 // error handler
 onerror(app)
 
@@ -26,6 +23,13 @@ app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
 
+//消去前缀`api`
+app.use(async (ctx, next) => {
+  if(ctx.request.url.substring(0,4) === '/api')
+    ctx.redirect(ctx.request.url.substring(4,ctx.request.url.length))
+  await next();
+})
+
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
@@ -35,9 +39,8 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(restql.routes())
+setRoute(app);
 
-// error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
