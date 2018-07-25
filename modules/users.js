@@ -31,7 +31,8 @@ function defineUser(sequelize) {
             type: Sequelize.STRING(10),
             defaultValue: ''
         }
-    })   
+    },
+    {underscored: true})   
 }
 
 module.exports = defineUser;
