@@ -14,7 +14,11 @@ function defineAttend(sequelize) {
             allowNull: false
         }
     },
-    {underscored: true})   
+    {
+        underscored: true,
+        timestamps: false,
+        tableName: 'attend',
+    })   
 }
 
 module.exports = defineAttend;

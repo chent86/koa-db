@@ -28,7 +28,11 @@ function defineGame(sequelize) {
             defaultValue: 1
         }
     },
-    {underscored: true})   
+    {
+        underscored: true,
+        timestamps: false,
+        tableName: 'game'
+    })   
 }
 
 module.exports = defineGame;

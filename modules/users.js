@@ -32,7 +32,11 @@ function defineUser(sequelize) {
             defaultValue: ''
         }
     },
-    {underscored: true})   
+    {
+        underscored: true,
+        timestamps: false,
+        tableName: 'user',
+    })   
 }
 
 module.exports = defineUser;
