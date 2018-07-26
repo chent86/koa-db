@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 function defineUser(sequelize) {
     return sequelize.define('user', {
-        uid: {
+        id: {
             type: Sequelize.INTEGER, 
             autoIncrement: true, 
             primaryKey: true
